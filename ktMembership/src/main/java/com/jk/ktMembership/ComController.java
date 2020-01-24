@@ -18,6 +18,13 @@ public class ComController {
 	@GetMapping("/login")
 	public String login() {
 		List<Login> loginList = loginRepository.findAll();
+		System.out.println(loginList.size());
+		System.out.println(loginList.size());
+		System.out.println(loginList.size());
+		System.out.println(loginList.size());
+		System.out.println(loginList.size());
+		System.out.println(loginList.size());
+		System.out.println(loginList.size());
 		return "login";
 	}
 
