@@ -21,7 +21,7 @@ public class BioRithmController {
     public String getBioDetailInfo(@PathVariable String mbrId, Model model) {
         Date date = new Date();
         BioRithm bio = new BioRithm();
-        ArrayList<Map<String,Object>> bioResult =  bio.displayPieChart("19740610",date);
+        ArrayList<Map<String,Object>> bioResult =  bio.displayPieChart(mbrId,date);
         model.addAttribute("bioResult",JSONArray.fromObject(bioResult));
         return "bioDetail";
     }

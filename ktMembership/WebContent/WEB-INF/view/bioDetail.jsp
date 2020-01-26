@@ -11,16 +11,27 @@
 <!doctype html>
 <html lang="kr">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
     var json = JSON.parse('${bioResult}');
 
-    console.log(json);
-
+    /*var testArrData = [['day', '감성', '지성', '육체']]
+    $(json).each(function(index){
+    	//console.log(index + " ::: " , json[index]); 
+    	var dt1 = json[index]['Date'].substring(6,7);
+    	var dt;
+    	if(dt1 == "0"){
+    		dt = json[index]['Date'].substring(7,8);
+    	}else{ dt = json[index]['Date'].substring(6,8);}
+    	console.log(dt);
+    	testArrData.push([dt,json[index]['emotional'],json[index]['intellectual'],json[index]['physical']]);
+    });*/
+   //console.log(testArrData);
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
-            var arrData = [
+            /* var arrData = [
                 ['day', '감성', '지성', '육체'],
                 ['1',-13, 90, 99],
                 ['2',-39, 78, 95],
@@ -53,7 +64,18 @@
                 ['29',-100, 90, 69],
                 ['30',-98, 78, 81],
                 ['31',-89, 63, 91]
-            ]
+            ]*/
+            var arrData = [['day', '감성', '지성', '육체']]
+            $(json).each(function(index){
+            	//console.log(index + " ::: " , json[index]); 
+            	var dt1 = json[index]['Date'].substring(6,7);
+            	var dt;
+            	if(dt1 == "0"){
+            		dt = json[index]['Date'].substring(7,8);
+            	}else{ dt = json[index]['Date'].substring(6,8);}
+            	console.log(dt);
+            	arrData.push([dt,json[index]['emotional'],json[index]['intellectual'],json[index]['physical']]);
+            });
             var data = google.visualization.arrayToDataTable(arrData);
 
             var options = {

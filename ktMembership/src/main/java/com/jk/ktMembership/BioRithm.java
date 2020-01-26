@@ -19,7 +19,7 @@ public class BioRithm {
 
     public ArrayList<Map<String,Object>> displayPieChart(String birthDay, Date today) {
         Map<String,Object> mapSindex = new HashMap<>();
-        mapSindex.put("phsical",VALUE_OF_BIORHYTHM_PHYSICAL);
+        mapSindex.put("physical",VALUE_OF_BIORHYTHM_PHYSICAL);
         mapSindex.put("emotional",VALUE_OF_BIORHYTHM_EMOTIONAL);
         mapSindex.put("intellectual",VALUE_OF_BIORHYTHM_INTELLECTUAL);
         ArrayList<Map<String,Object>> mapSinRslt = getBiorhythm(birthDay, today, mapSindex,"");
@@ -28,7 +28,7 @@ public class BioRithm {
     }
     private Map<String,Object> getBiorhythm(String birthday, Date date, Map<String,Object> type) {
         Map<String,Object> bioRslt = new HashMap<>();
-        Map<String,Object> mapRslt = new HashMap<>();
+        //Map<String,Object> mapRslt = new HashMap<>();
 
         type.entrySet().forEach((entry) -> {
             float fbioIdx =getBiorhythm(birthday, date,(Integer)entry.getValue());
@@ -36,9 +36,10 @@ public class BioRithm {
         });
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
         String strDay = sf.format(date);
-        mapRslt.put(strDay,bioRslt);
+        //mapRslt.put(strDay,bioRslt);
+        bioRslt.put("Date", strDay);
 
-        return mapRslt;
+        return bioRslt;
     }
     private ArrayList<Map<String,Object>> getBiorhythm(String birthday, Date date, Map<String,Object> type, String bioKind) {
         Map<String,Object> bioRslt = new HashMap<>();
