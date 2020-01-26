@@ -17,12 +17,20 @@ public class BioRithm {
 //        bio.displayPieChart("19740610",date);
 //    }
 
-    public ArrayList<Map<String,Object>> displayPieChart(String birthDay, Date today) {
+    public ArrayList<Map<String,Object>> displayPieChart(String birthDay, Date today, String DateType) {
         Map<String,Object> mapSindex = new HashMap<>();
         mapSindex.put("physical",VALUE_OF_BIORHYTHM_PHYSICAL);
         mapSindex.put("emotional",VALUE_OF_BIORHYTHM_EMOTIONAL);
         mapSindex.put("intellectual",VALUE_OF_BIORHYTHM_INTELLECTUAL);
-        ArrayList<Map<String,Object>> mapSinRslt = getBiorhythm(birthDay, today, mapSindex,"");
+        
+        ArrayList<Map<String,Object>> mapSinRslt = new ArrayList<>();
+        Map<String,Object> bioRslt = new HashMap<>();
+        if(DateType.equals("month")) {
+        	mapSinRslt = getBiorhythm(birthDay, today, mapSindex,"");
+        }else {
+        	bioRslt = getBiorhythm(birthDay, today, mapSindex);
+        	mapSinRslt.add(bioRslt);
+        }
         mapSinRslt.stream().forEach( map -> System.out.println(map.toString()));
         return mapSinRslt;
     }

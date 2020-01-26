@@ -14,57 +14,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-    var json = JSON.parse('${bioResult}');
-
-    /*var testArrData = [['day', '감성', '지성', '육체']]
-    $(json).each(function(index){
-    	//console.log(index + " ::: " , json[index]); 
-    	var dt1 = json[index]['Date'].substring(6,7);
-    	var dt;
-    	if(dt1 == "0"){
-    		dt = json[index]['Date'].substring(7,8);
-    	}else{ dt = json[index]['Date'].substring(6,8);}
-    	console.log(dt);
-    	testArrData.push([dt,json[index]['emotional'],json[index]['intellectual'],json[index]['physical']]);
-    });*/
-   //console.log(testArrData);
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
+        var json = JSON.parse('${bioResult}');
+        var json_today = JSON.parse('${bioResult_today}');
+        var json_next = JSON.parse('${bioResult_next}');
+        var json_prev = JSON.parse('${bioResult_prev}');
+        $(document).ready(function() {
+        	curMondth();
+        });
+        var curMondth = function(){
+        	google.charts.load('current', {'packages':['corechart']});
+        	google.charts.setOnLoadCallback(drawChart);
+        }
+        var preMondth = function(){
+        	google.charts.load('current', {'packages':['corechart']});
+        	google.charts.setOnLoadCallback(drawChart_prev);
+        }
+        var nextMondth = function(){
+        	google.charts.load('current', {'packages':['corechart']});
+        	google.charts.setOnLoadCallback(drawChart_next);
+        }
         function drawChart() {
-            /* var arrData = [
-                ['day', '감성', '지성', '육체'],
-                ['1',-13, 90, 99],
-                ['2',-39, 78, 95],
-                ['3',-63, 63, 87],
-                ['4',-81, 44, 76],
-                ['5',-94, 23, 62],
-                ['6',-100, 0, 46],
-                ['7',-98, -22, 28],
-                ['8',-89, -43, 10],
-                ['9',-73, -62, -9],
-                ['10',-52, -78, -28],
-                ['11',-27, -90, -46],
-                ['12',0, -97, -62],
-                ['13',27, -100, -75],
-                ['14',52, -98, -86],
-                ['15',73, -90, -94],
-                ['16',89, -78, -99],
-                ['17',98, -63, -100],
-                ['18',100, -44, -97],
-                ['19',94, -23, -91],
-                ['20',82, 0, -82],
-                ['21',63, 22, -69],
-                ['22',40, 43, -54],
-                ['23',14, 62, -37],
-                ['24',-13, 78, -19],
-                ['25',-39, 90, 0],
-                ['26',-63, 97, 19],
-                ['27',-81, 100, 37],
-                ['28',-94, 98, 54],
-                ['29',-100, 90, 69],
-                ['30',-98, 78, 81],
-                ['31',-89, 63, 91]
-            ]*/
             var arrData = [['day', '감성', '지성', '육체']]
             $(json).each(function(index){
             	//console.log(index + " ::: " , json[index]); 
@@ -88,10 +57,62 @@
 
             chart.draw(data, options);
         }
+        
+        function drawChart_next() {
+            var arrData = [['day', '감성', '지성', '육체']]
+            $(json_next).each(function(index){
+            	//console.log(index + " ::: " , json[index]); 
+            	var dt1 = json_next[index]['Date'].substring(6,7);
+            	var dt;
+            	if(dt1 == "0"){
+            		dt = json_next[index]['Date'].substring(7,8);
+            	}else{ dt = json_next[index]['Date'].substring(6,8);}
+            	console.log(dt);
+            	arrData.push([dt,json_next[index]['emotional'],json_next[index]['intellectual'],json_next[index]['physical']]);
+            });
+            var data = google.visualization.arrayToDataTable(arrData);
+
+            var options = {
+                title: '바이오리듬',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+        }
+        function drawChart_prev() {
+            var arrData = [['day', '감성', '지성', '육체']]
+            $(json_prev).each(function(index){
+            	//console.log(index + " ::: " , json[index]); 
+            	var dt1 = json_prev[index]['Date'].substring(6,7);
+            	var dt;
+            	if(dt1 == "0"){
+            		dt = json_prev[index]['Date'].substring(7,8);
+            	}else{ dt = json_prev[index]['Date'].substring(6,8);}
+            	console.log(dt);
+            	arrData.push([dt,json_prev[index]['emotional'],json_prev[index]['intellectual'],json_prev[index]['physical']]);
+            });
+            var data = google.visualization.arrayToDataTable(arrData);
+
+            var options = {
+                title: '바이오리듬',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+        }
     </script>
 </head>
 <body>
 <div id="curve_chart" style="width: 1000px; height: 800px"></div>
-<span> BioRhithm : </span><span>${bioResult[0]}</span>
+<input type="button" onclick="javascript:curMondth();" value="현재달" /><br />
+<input type="button" onclick="javascript:preMondth();" value="이전달" /><br />
+<input type="button" onclick="javascript:nextMondth();" value="다음달" />
+<span>${bioResult_today[0]['emotional']},${bioResult_today[0]['intellectual']},${bioResult_today[0]['physical']}</span>
 </body>
 </html>
