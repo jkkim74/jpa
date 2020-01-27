@@ -71,8 +71,11 @@
                 curveType: 'function',
                 lineWidth: 7,
                 legend: { position: 'bottom' },
+                vAxis:{
+                  ticks: []
+                },
            	 	hAxis: { 
-           	     ticks: hTicks 
+           	      ticks: hTicks 
            	    }
             };
             
