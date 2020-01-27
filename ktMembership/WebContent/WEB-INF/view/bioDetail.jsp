@@ -22,20 +22,18 @@
     	var seDate_next = '${seDate_next}'.replace(';',' ~ ');
      	var json_prev = JSON.parse('${bioResult_prev}');
     	var seDate_prev = '${seDate_prev}'.replace(';',' ~ ');
+    	google.charts.load('current', {'packages':['corechart']});
        
         $(document).ready(function() {
         	curMondth();
         });
         var curMondth = function(){
-        	google.charts.load('current', {'packages':['corechart']});
         	google.charts.setOnLoadCallback(function() { drawChart(json,seDate); });
         }
         var preMondth = function(){
-        	google.charts.load('current', {'packages':['corechart']});
         	google.charts.setOnLoadCallback(function() { drawChart(json_prev, seDate_prev); });
         }
         var nextMondth = function(){
-        	google.charts.load('current', {'packages':['corechart']});
         	google.charts.setOnLoadCallback(function() { drawChart(json_next, seDate_next); });
         }
         function drawChart(json, seDate) {
