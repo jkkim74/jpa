@@ -12,12 +12,11 @@
 <html lang="kr">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="/membership/js/loader.js"></script>
     <script type="text/javascript">
-        var json = JSON.parse('${bioResult}');
+       
         var json_today = JSON.parse('${bioResult_today}');
-        var json_next = JSON.parse('${bioResult_next}');
-        var json_prev = JSON.parse('${bioResult_prev}');
+       
         $(document).ready(function() {
         	curMondth();
         });
@@ -34,6 +33,8 @@
         	google.charts.setOnLoadCallback(drawChart_next);
         }
         function drawChart() {
+        	var json = JSON.parse('${bioResult}');
+        	var seDate = '${seDate}'.replace(';',' ~ ');
             var arrData = [['day', '감성', '지성', '육체']]
             $(json).each(function(index){
             	//console.log(index + " ::: " , json[index]); 
@@ -46,9 +47,9 @@
             	arrData.push([dt,json[index]['emotional'],json[index]['intellectual'],json[index]['physical']]);
             });
             var data = google.visualization.arrayToDataTable(arrData);
-
+            var strTitle = '바이오리듬( '+seDate+' ) ';
             var options = {
-                title: '바이오리듬',
+                title: strTitle,
                 curveType: 'function',
                 legend: { position: 'bottom' }
             };
@@ -59,6 +60,8 @@
         }
         
         function drawChart_next() {
+        	var json_next = JSON.parse('${bioResult_next}');
+        	var seDate = '${seDate_next}'.replace(';',' ~ ');
             var arrData = [['day', '감성', '지성', '육체']]
             $(json_next).each(function(index){
             	//console.log(index + " ::: " , json[index]); 
@@ -71,9 +74,9 @@
             	arrData.push([dt,json_next[index]['emotional'],json_next[index]['intellectual'],json_next[index]['physical']]);
             });
             var data = google.visualization.arrayToDataTable(arrData);
-
+            var strTitle = '바이오리듬( '+seDate+' ) ';
             var options = {
-                title: '바이오리듬',
+                title: strTitle,
                 curveType: 'function',
                 legend: { position: 'bottom' }
             };
@@ -83,6 +86,8 @@
             chart.draw(data, options);
         }
         function drawChart_prev() {
+        	var json_prev = JSON.parse('${bioResult_prev}');
+        	var seDate = '${seDate_prev}'.replace(';',' ~ ');
             var arrData = [['day', '감성', '지성', '육체']]
             $(json_prev).each(function(index){
             	//console.log(index + " ::: " , json[index]); 
@@ -95,9 +100,9 @@
             	arrData.push([dt,json_prev[index]['emotional'],json_prev[index]['intellectual'],json_prev[index]['physical']]);
             });
             var data = google.visualization.arrayToDataTable(arrData);
-
+            var strTitle = '바이오리듬( '+seDate+' ) ';
             var options = {
-                title: '바이오리듬',
+                title: strTitle,
                 curveType: 'function',
                 legend: { position: 'bottom' }
             };
