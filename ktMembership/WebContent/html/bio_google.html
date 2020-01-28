@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+	    var data = new google.visualization.DataTable();
+		data.addColumn('number', 'day');
+		data.addColumn({type: 'string', role: 'annotation'});
+		data.addColumn({type: 'string', role: 'annotationText'});
+		data.addColumn('number', '감성');
+		data.addColumn('number', '지성');
+		data.addColumn('number', '육체');
+		data.addRow([1, null, null, -13, 90, 99]);
+		data.addRow([2, null, null, -39, 78, 95]);
+		data.addRow([3, null, null, -63, 63, 87]);
+		data.addRow([4, null, null, -81, 44, 76]);
+		data.addRow([5, null, null, -94, 23, 62]);
+		data.addRow([6, null, null, -100, 0, 46]);
+		data.addRow([7, null, null, -98, -22, 28]);
+		data.addRow([8, null, null, -89, -43, 10]);
+		data.addRow([9, null, null, -73, -62, -9]);
+		data.addRow([10, null, null, -52, -78, -28]);
+		data.addRow([11, null, null, -27, -90, -46]);
+		data.addRow([12, null, null, 0, -97, -62]);
+		data.addRow([13, null, null, 27, -100, -75]);
+		data.addRow([14, null, null, 52, -98, -86]);
+		data.addRow([15, null, null, 73, -90, -94]);
+		data.addRow([16, null, null, 89, -78, -99]);
+		data.addRow([17, null, null, 98, -63, -100]);
+		data.addRow([18, null, null, 100, -44, -97]);
+		data.addRow([19, null, null, 94, -23, -91]);
+		data.addRow([20, null, null, 82, 0, -82]);
+		data.addRow([21, null, null, 63, 22, -69]);
+		data.addRow([22, null, null, 40, 43, -54]);
+		data.addRow([23, null, null, 14, 62, -37]);
+		data.addRow([24, null, null, -13, 78, -19]);
+		data.addRow([25, null, null, -39, 90, 0]);
+		data.addRow([26, null, null, -63, 97, 19]);
+		data.addRow([27, null, null, -81, 100, 37]);
+		data.addRow([28, null, null, -94, 98, 54]);
+		data.addRow([29, 'Bar', 'Bar annontation', -100, 90, 69]);
+		data.addRow([30, null, null, -98, 78, 81]);
+		data.addRow([31, null, null, -89, 63, 91]);
+        /*var arrData = [
+			['day', '감성', '지성', '육체'],
+			['1',-13, 90, 99],
+			['2',-39, 78, 95],
+			['3',-63, 63, 87],
+			['4',-81, 44, 76],
+			['5',-94, 23, 62],
+			['6',-100, 0, 46],
+			['7',-98, -22, 28],
+			['8',-89, -43, 10],
+			['9',-73, -62, -9],
+			['10',-52, -78, -28],
+			['11',-27, -90, -46],
+			['12',0, -97, -62],
+			['13',27, -100, -75],
+			['14',52, -98, -86],
+			['15',73, -90, -94],
+			['16',89, -78, -99],
+			['17',98, -63, -100],
+			['18',100, -44, -97],
+			['19',94, -23, -91],
+			['20',82, 0, -82],
+			['21',63, 22, -69],
+			['22',40, 43, -54],
+			['23',14, 62, -37],
+			['24',-13, 78, -19],
+			['25',-39, 90, 0],
+			['26',-63, 97, 19],
+			['27',-81, 100, 37],
+			['28',-94, 98, 54],
+			['29',-100, 90, 69],
+			['30',-98, 78, 81],
+			['31',-89, 63, 91]
+        ]*/
+        //var data = google.visualization.arrayToDataTable(arrData);
+
+        /*var options = {
+          title: '바이오리듬',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };*/
+		var chartDiv = document.getElementById('curve_chart');
+        var chart = new google.visualization.LineChart(chartDiv);
+		/**
+		*      case '#922b21':
+          case '#1e8449':
+          case '#007fff':
+		*/
+		var annotationColor = '#007fff';
+		google.visualization.events.addListener(chart, 'ready', function () {
+			Array.prototype.forEach.call(chartDiv.getElementsByTagName('rect'), function(rect) {
+			  if (rect.getAttribute('fill') === annotationColor) {
+				rect.setAttribute('width', '5');
+			  }
+			});
+		});
+
+		var options = {
+			title: '바이오리듬',
+			curveType: 'function',
+			annotations: {
+			  stem: {
+				color: annotationColor
+			  },
+			  style: 'line'
+			},
+			legend: { position: 'bottom' }
+		}
+
+        
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="curve_chart" style="width: 1000px; height: 800px"></div>
+  </body>
+</html>
