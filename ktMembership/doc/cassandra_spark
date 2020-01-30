@@ -7,3 +7,4 @@ ex) DESC cycling.calendar
 
 ## GC_GRACE_SECONDS change
 alter table hotels with GC_GRACE_SECONDS = 3600;
+
