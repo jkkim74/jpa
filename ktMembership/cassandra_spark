@@ -1,0 +1,10 @@
+## table 이름조회
+DESC TABLES 
+
+## 테이블 정보 조회
+DESC keyspace.table
+ex) DESC cycling.calendar
+
+## GC_GRACE_SECONDS change
+alter table hotels with GC_GRACE_SECONDS = 3600;
+
