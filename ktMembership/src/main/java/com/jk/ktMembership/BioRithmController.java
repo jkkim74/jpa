@@ -24,6 +24,7 @@ public class BioRithmController {
         Date date = new Date();
         BioRithm bio = new BioRithm();
         ArrayList<Map<String,Object>> bioResult_today =  bio.displayPieChart(mbrId,date,"today");
+        model.addAttribute("day",getToday());
         model.addAttribute("bioResult_today",JSONArray.fromObject(bioResult_today));
         
         model.addAttribute("seDate",getStartEndDate(date));
@@ -47,6 +48,12 @@ public class BioRithmController {
 	   Calendar cal = Calendar.getInstance( );
        cal.add (Calendar.MONTH, dt); //다음달
        return cal.getTime();
+   }
+   
+   public int getToday() {
+	   SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
+	   Calendar cal = Calendar.getInstance( ); 
+	   return Integer.parseInt(sf.format(cal.getTime()).substring(6,8));
    }
    
    public String getStartEndDate(Date date) {
