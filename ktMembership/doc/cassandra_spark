@@ -8,3 +8,6 @@ ex) DESC cycling.calendar
 ## GC_GRACE_SECONDS change
 alter table hotels with GC_GRACE_SECONDS = 3600;
 
+## cassandra tombstone 재조정을 위한 command 
+nodetool garbagecollect // 모든 키스페이스
+nodetool garbagecollect ktmemks // 해당 키스페이스
