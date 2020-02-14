@@ -31,8 +31,6 @@
 	box-shadow:0 0 5px #555;
 }
 
-div.custom-tooltip { position: absolute; top: 70px; right: 20px; }
-
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
@@ -62,47 +60,31 @@ div.custom-tooltip { position: absolute; top: 70px; right: 20px; }
         var nextMondth = function(){
         	google.charts.setOnLoadCallback(function() { drawChart(json_next, seDate_next,'curve_chart3'); });
         }
-        function createCustomHTMLContent(number) {
-        	return '<div style="padding:5px 5px 5px 5px;background-color:"+ color + ";"><span>' +  number + "</span></div>"
-        }
         function drawChart(json, seDate, divId) {
         	
             //var arrData = [['day', '감성', '지성', '육체']]
                 var data = new google.visualization.DataTable();
-				data.addColumn('date', 'day');
+				data.addColumn('number', 'day');
 				data.addColumn({type: 'string', role: 'annotation'});
 				data.addColumn({type: 'string', role: 'annotationText'});
 				data.addColumn('number', '감성');
 				data.addColumn('number', '지성');
-				data.addColumn('number', '신체');
-				//data.addColumn({'type': 'number', 'role': 'tooltip', 'p': {'html': true}});
+				data.addColumn('number', '육체');
             $(json).each(function(index){
             	//console.log(index + " ::: " , json[index]); 
             	var dt1 = json[index]['Date'].substring(6,7);
-            	var month1 = json[index]['Date'].substring(4,6);
             	var dt;
             	if(dt1 == "0"){
             		dt = json[index]['Date'].substring(7,8);
             	}else{ dt = json[index]['Date'].substring(6,8);}
-            	
-            	//if(month1 == "0"){
-            	//	month = json[index]['Date'].substring(5,6);
-            	//}else{ month = json[index]['Date'].substring(4,6);}
             	//console.log(dt);
             	var nDt = parseInt(dt);
             	var today = parseInt('${day}');
-            	//var monthDay = month+"월"+dt+"일";
-            	var month = parseInt(month1)-1;
-                console.log(month)
-            	var date = new Date(2020,month,nDt);
-            	//console.log(date);
             	if(nDt == today){
-            		//data.addRow([monthDay, '', '', json[index]['emotional'], json[index]['intellectual'], json[index]['physical'],json[index]['physical']]);
-            		data.addRow([date, '', '', json[index]['emotional'], json[index]['intellectual'], json[index]['physical']]);
+            		data.addRow([nDt, '', '', json[index]['emotional'], json[index]['intellectual'], json[index]['physical']]);
                 	
             	}else{
-            		//data.addRow([monthDay, null, null, json[index]['emotional'], json[index]['intellectual'], json[index]['physical'],json[index]['physical']]);
-            		data.addRow([date, null, null, json[index]['emotional'], json[index]['intellectual'], json[index]['physical']]);
+            		data.addRow([nDt, null, null, json[index]['emotional'], json[index]['intellectual'], json[index]['physical']]);
             	}
             	//arrData.push([nDt,json[index]['emotional'],json[index]['intellectual'],json[index]['physical']]);
             });
@@ -121,34 +103,13 @@ div.custom-tooltip { position: absolute; top: 70px; right: 20px; }
               case '#1e8449':
               case '#007fff':
     		*/
-    		var annotationColor = '#daa520';
+    		var annotationColor = '#007fff';
     		google.visualization.events.addListener(chart, 'ready', function () {
     			Array.prototype.forEach.call(chartDiv.getElementsByTagName('rect'), function(rect) {
     			  if (rect.getAttribute('fill') === annotationColor) {
     				rect.setAttribute('width', '5');
-    				  // 선추가
-    				  objCopy = rect.cloneNode(true);
-                      objCopy.setAttribute('fill', '#ff0000');
-                      objCopy.setAttribute('width', 3);
-                      objCopy.setAttribute('display', 'none');
-                      rect.parentNode.appendChild(objCopy);
     			  }
     			});
-    		});
-    		
-    		google.visualization.events.addListener(chart, 'select', function () {
-
-    		     if(chart.getSelection()[0] == undefined) return;
-    		     var row = chart.getSelection()[0].row;
-    		     //var col = chart.getSelection()[0].column;
-    		     var xValue = chartDiv.querySelector('circle').getAttribute('cx');
-    		     deRect = chartDiv.querySelector('rect[fill="#daa520"]').getAttribute('x');
-    		     if(deRect != xValue) {
-    		                chartDiv.querySelector('rect[fill="#ff0000"]').setAttribute('display', 'block');
-    		                chartDiv.querySelector('rect[fill="#ff0000"]').setAttribute('x', xValue-2);
-    		     } else {
-    		                chartDiv.querySelector('rect[fill="#ff0000"]').setAttribute('display', 'none');
-    		     }
     		});
     		var options = getOptions(seDate,data,annotationColor);
     		/*var options = {
@@ -163,40 +124,18 @@ div.custom-tooltip { position: absolute; top: 70px; right: 20px; }
     			legend: { position: 'bottom' }
     		}*/
 
-    
+            
 
             chart.draw(data, options);
-    		
- 		   // Add our over/out handlers. 
-            /* google.visualization.events.addListener(chart, 'onmouseover', onMouseOver); 
-            google.visualization.events.addListener(chart, 'onmouseout', onMouseOut); 
-            
-            var $customTooltip = $("div.custom-tooltip"); 
-            function onMouseOver(e) { 
-               var row = e.row; 
-               if(row != null){ 
-                $("#row0").text(data.getValue(row, 0)); 
-                $("#row1").text(data.getValue(row, 3)); 
-                $("#row2").text(data.getValue(row, 4)); 
-                $("#row3").text(data.getValue(row, 5))
-                  
-                 chart.setSelection([e]); 
-             } 
-           } 
-           function onMouseOut(e) { 
-             // 
-           } */
         }
         
         function getOptions(seDate,data,annotationColor){
-        	// x축 string으로 지정하면 안나와서 주석 처리
-        	/*var h_interval = 5; 
+        	var h_interval = 5; 
             var h_dataRange = data.getColumnRange(0); 
             var hTicks = []; 
-            console.log(h_dataRange);
-            for (var i = 0; i <= 29; i = i + h_interval) { 
+            for (var i = h_dataRange.min; i <= h_dataRange.max; i = i + h_interval) { 
              hTicks.push(i); 
-            }*/
+            } 
         	var strTitle = '바이오리듬( '+seDate+' ) ';
             var options = {
                 title: strTitle,
@@ -210,30 +149,15 @@ div.custom-tooltip { position: absolute; top: 70px; right: 20px; }
     			},
                 legend: { position: 'none' },
                 vAxis:{
-                    ticks: []
-                  },
-             	/* hAxis: { 
-             	      ticks: hTicks
-             	 },*/
-             	 hAxis: {
-             	      format: 'MM/dd'
-             	 },
-           	 
-           	// This line makes the entire category's tooltip active. 전체카테고리 정보가 다 나옴..
-           	    focusTarget: 'category'
-           	  // Group selections
-           	     // by x-value.
-           	   //  aggregationTarget: 'category',
-           	  //tooltip: { trigger: 'selection'} 선택시 tooltip 나옴.
-           	    // Use an HTML tooltip.
-           	    //tooltip: { isHtml: true} //trigger: 'selection' ,trigger: 'none'// 안나옴.
+                  ticks: []
+                },
+           	 	hAxis: { 
+           	      ticks: hTicks 
+           	    }
             };
             
             return options;
         }
-        
-     
-      
     </script>
 </head>
 <body>
@@ -276,12 +200,5 @@ var mySwipe = new Swiper('.swiper-container',{
 });
 
 </script>
-<!-- 별도로 tooltip을 만들때 사용 함..<div id="curve_chart" style="height: 500px;"></div> 
-<div class="custom-tooltip"> 
-날짜: <span id="row0"></span><br/> 
-감정: <span id="row1"></span><br/>  
-지성: <span id="row2"></span><br/>  
-신체: <span id="row3"></span>
-</div> -->
 </body>
 </html>
