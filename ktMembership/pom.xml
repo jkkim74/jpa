@@ -59,6 +59,15 @@
 		    <version>2.4</version>
 		    <classifier>jdk15</classifier>
 		</dependency>	
+		<dependency>
+		   <groupId>org.apache.httpcomponents</groupId>
+		   <artifactId>httpclient</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

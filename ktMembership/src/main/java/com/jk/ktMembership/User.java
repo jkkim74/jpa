@@ -9,11 +9,12 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class User {
-	
 	@Id @GeneratedValue
 	private Long mbrId;
 	
 	private String name;
+
+	private String birthDay;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created = new Date();
@@ -41,7 +42,22 @@ public class User {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
-	
 
+	public String getBirthDay() {
+		return birthDay;
+	}
+
+	public void setBirthDay(String birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"mbrId=" + mbrId +
+				", name='" + name + '\'' +
+				", birthDay='" + birthDay + '\'' +
+				", created=" + created +
+				'}';
+	}
 }

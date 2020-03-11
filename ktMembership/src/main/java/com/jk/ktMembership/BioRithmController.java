@@ -19,8 +19,10 @@ import java.util.Map;
 @RequestMapping("/bio")
 public class BioRithmController {
 
-    @GetMapping("/detail/{mbrId}")
-    public String getBioDetailInfo(@PathVariable String mbrId, Model model) {
+    @GetMapping("/detail/{user}")
+    public String getBioDetailInfo(@PathVariable User user, Model model) {
+        System.out.println(user.toString());
+        String mbrId = user.getBirthDay();
         Date date = new Date();
         BioRithm bio = new BioRithm();
         ArrayList<Map<String,Object>> bioResult_today =  bio.displayPieChart(mbrId,date,"today");
