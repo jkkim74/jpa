@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class HttpConnectionConfig {
 
     @Bean
-    public RestTemplate getCustomRestTemplate(){
+    public RestTemplate getCustomRestTemplate() {
         HttpComponentsClientHttpRequestFactory httpRequestFactory = new HttpComponentsClientHttpRequestFactory();
         httpRequestFactory.setConnectTimeout(2000);
         httpRequestFactory.setReadTimeout(3000);

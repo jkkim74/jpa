@@ -17,29 +17,30 @@ public class BioRithm {
 //        bio.displayPieChart("19740610",date);
 //    }
 
-    public ArrayList<Map<String,Object>> displayPieChart(String birthDay, Date today, String DateType) {
-        Map<String,Object> mapSindex = new HashMap<>();
-        mapSindex.put("physical",VALUE_OF_BIORHYTHM_PHYSICAL);
-        mapSindex.put("emotional",VALUE_OF_BIORHYTHM_EMOTIONAL);
-        mapSindex.put("intellectual",VALUE_OF_BIORHYTHM_INTELLECTUAL);
-        
-        ArrayList<Map<String,Object>> mapSinRslt = new ArrayList<>();
-        Map<String,Object> bioRslt = new HashMap<>();
-        if(DateType.equals("month")) {
-        	mapSinRslt = getBiorhythm(birthDay, today, mapSindex,"");
-        }else {
-        	bioRslt = getBiorhythm(birthDay, today, mapSindex);
-        	mapSinRslt.add(bioRslt);
+    public ArrayList<Map<String, Object>> displayPieChart(String birthDay, Date today, String DateType) {
+        Map<String, Object> mapSindex = new HashMap<>();
+        mapSindex.put("physical", VALUE_OF_BIORHYTHM_PHYSICAL);
+        mapSindex.put("emotional", VALUE_OF_BIORHYTHM_EMOTIONAL);
+        mapSindex.put("intellectual", VALUE_OF_BIORHYTHM_INTELLECTUAL);
+
+        ArrayList<Map<String, Object>> mapSinRslt = new ArrayList<>();
+        Map<String, Object> bioRslt = new HashMap<>();
+        if (DateType.equals("month")) {
+            mapSinRslt = getBiorhythm(birthDay, today, mapSindex, "");
+        } else {
+            bioRslt = getBiorhythm(birthDay, today, mapSindex);
+            mapSinRslt.add(bioRslt);
         }
-        mapSinRslt.stream().forEach( map -> System.out.println(map.toString()));
+        mapSinRslt.stream().forEach(map -> System.out.println(map.toString()));
         return mapSinRslt;
     }
-    private Map<String,Object> getBiorhythm(String birthday, Date date, Map<String,Object> type) {
-        Map<String,Object> bioRslt = new HashMap<>();
+
+    private Map<String, Object> getBiorhythm(String birthday, Date date, Map<String, Object> type) {
+        Map<String, Object> bioRslt = new HashMap<>();
         //Map<String,Object> mapRslt = new HashMap<>();
 
         type.entrySet().forEach((entry) -> {
-            float fbioIdx =getBiorhythm(birthday, date,(Integer)entry.getValue());
+            float fbioIdx = getBiorhythm(birthday, date, (Integer) entry.getValue());
             bioRslt.put(entry.getKey(), fbioIdx);
         });
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
@@ -49,36 +50,38 @@ public class BioRithm {
 
         return bioRslt;
     }
-    private ArrayList<Map<String,Object>> getBiorhythm(String birthday, Date date, Map<String,Object> type, String bioKind) {
-        Map<String,Object> bioRslt = new HashMap<>();
-        ArrayList<Map<String,Object>> arrayList = new ArrayList<>();
+
+    private ArrayList<Map<String, Object>> getBiorhythm(String birthday, Date date, Map<String, Object> type, String bioKind) {
+        Map<String, Object> bioRslt = new HashMap<>();
+        ArrayList<Map<String, Object>> arrayList = new ArrayList<>();
 
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
-        int year = Integer.parseInt(sf.format(date).substring(0,4));
-        int month = Integer.parseInt(sf.format(date).substring(4,6));
+        int year = Integer.parseInt(sf.format(date).substring(0, 4));
+        int month = Integer.parseInt(sf.format(date).substring(4, 6));
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month); //입력받은 월로 세팅
-        cal.set(year,month-1,1); //입력받은 월의 1일로 세팅
+        cal.set(year, month - 1, 1); //입력받은 월의 1일로 세팅
         int end = cal.getActualMaximum(Calendar.DATE); //해당 월 마지막 날짜
-        for(int i=1; i<=end; i++) {
+        for (int i = 1; i <= end; i++) {
             //System.out.println(sf.format(cal.getTime()));
             Date bioDate = cal.getTime();
             bioRslt = getBiorhythm(birthday, bioDate, type);
             arrayList.add(bioRslt);
-            cal.add(Calendar.DATE,1);
+            cal.add(Calendar.DATE, 1);
         }
 
         return arrayList;
     }
+
     private float getBiorhythm(String birthday, Date today, int type) {
-        if(today == null) {
+        if (today == null) {
             today = new Date();
         }
 
         Date birthDate = null;
 
-        if(birthday == null || birthday.length() != 8) {
+        if (birthday == null || birthday.length() != 8) {
             birthDate = today;
         } else {
             try {
@@ -98,8 +101,6 @@ public class BioRithm {
 
         return bd.floatValue();
     }
-
-
 
 
 }

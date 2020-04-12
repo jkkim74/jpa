@@ -9,14 +9,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class LoginRepositoryTest {
-	
-	@Autowired
-	LoginRepository loginRepository;
-	
-	
-	@Test
-	public void login() {
-		
-	}
+
+    @Autowired
+    LoginRepository loginRepository;
+
+
+    @Test
+    public void login() {
+
+    }
 
 }

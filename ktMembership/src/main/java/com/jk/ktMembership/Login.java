@@ -12,38 +12,39 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Login {
-	
-	@Id @GeneratedValue
-	private Long id;
-	
-	@ManyToOne(targetEntity=User.class,fetch=FetchType.LAZY)
-	private Long mbrId;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date created = new Date();
 
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    private Long mbrId;
 
-	public Long getMbrId() {
-		return mbrId;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created = new Date();
 
-	public void setMbrId(Long mbrId) {
-		this.mbrId = mbrId;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Date getCreated() {
-		return created;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public Long getMbrId() {
+        return mbrId;
+    }
+
+    public void setMbrId(Long mbrId) {
+        this.mbrId = mbrId;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
 }

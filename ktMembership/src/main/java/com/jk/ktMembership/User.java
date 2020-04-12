@@ -1,4 +1,5 @@
 package com.jk.ktMembership;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,55 +10,56 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class User {
-	@Id @GeneratedValue
-	private Long mbrId;
-	
-	private String name;
+    @Id
+    @GeneratedValue
+    private Long mbrId;
 
-	private String birthDay;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date created = new Date();
+    private String name;
 
-	public Long getMbrId() {
-		return mbrId;
-	}
+    private String birthDay;
 
-	public void setMbrId(Long mbrId) {
-		this.mbrId = mbrId;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created = new Date();
 
-	public String getName() {
-		return name;
-	}
+    public Long getMbrId() {
+        return mbrId;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setMbrId(Long mbrId) {
+        this.mbrId = mbrId;
+    }
 
-	public Date getCreated() {
-		return created;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getBirthDay() {
-		return birthDay;
-	}
+    public Date getCreated() {
+        return created;
+    }
 
-	public void setBirthDay(String birthDay) {
-		this.birthDay = birthDay;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"mbrId=" + mbrId +
-				", name='" + name + '\'' +
-				", birthDay='" + birthDay + '\'' +
-				", created=" + created +
-				'}';
-	}
+    public String getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "mbrId=" + mbrId +
+                ", name='" + name + '\'' +
+                ", birthDay='" + birthDay + '\'' +
+                ", created=" + created +
+                '}';
+    }
 }

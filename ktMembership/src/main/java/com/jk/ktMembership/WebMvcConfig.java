@@ -10,26 +10,26 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-	
-	@Autowired
-	private HandlerInterceptor HandlerInterceptor;
-	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(HandlerInterceptor)
-				.addPathPatterns("/**/delete")
-				.addPathPatterns("/**/update")
-				.addPathPatterns("/**/create");
-		
-		WebMvcConfigurer.super.addInterceptors(registry);		
-	} 
-	
-	@Bean
-	public ViewResolver getViewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/view/");
-		resolver.setSuffix(".jsp");
-		return resolver;
-	}
+
+    @Autowired
+    private HandlerInterceptor HandlerInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(HandlerInterceptor)
+                .addPathPatterns("/**/delete")
+                .addPathPatterns("/**/update")
+                .addPathPatterns("/**/create");
+
+        WebMvcConfigurer.super.addInterceptors(registry);
+    }
+
+    @Bean
+    public ViewResolver getViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/view/");
+        resolver.setSuffix(".jsp");
+        return resolver;
+    }
 
 }

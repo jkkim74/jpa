@@ -21,15 +21,15 @@ public class RestTemplateUtil {
 
     @Autowired
     public RestTemplateUtil(RestTemplate restTemplate) {
-        this.restTemplate=restTemplate;
+        this.restTemplate = restTemplate;
     }
 
-    public static String getJsonRsponse(String address){
-    	restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
-        return restTemplate.getForObject("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByAddr/json?address="+address, String.class);
+    public static String getJsonRsponse(String address) {
+        restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+        return restTemplate.getForObject("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByAddr/json?address=" + address, String.class);
     }
 
-    public static ResponseEntity<String> getResponseEntity(String key){
+    public static ResponseEntity<String> getResponseEntity(String key) {
         //header setting
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authentication", key);
@@ -44,7 +44,7 @@ public class RestTemplateUtil {
         return restTemplate.exchange("http://localhost:8080/entity?name={name}", HttpMethod.GET, httpEntity, String.class, params);
     }
 
-    public static ResponseEntity<String> post(){
+    public static ResponseEntity<String> post() {
         return restTemplate.postForEntity("http://localhost:8080/post", "Post Request", String.class);
     }
 }

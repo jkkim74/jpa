@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Transactional
-public class AppRunner implements ApplicationRunner{
-	
-	@Autowired
-	UserRepository userRepository;
+public class AppRunner implements ApplicationRunner {
 
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
-		// TODO Auto-generated method stub
+    @Autowired
+    UserRepository userRepository;
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        // TODO Auto-generated method stub
 //		User user = new User();
 //		user.setName("jkkim");
 //		
@@ -41,8 +41,8 @@ public class AppRunner implements ApplicationRunner{
 //		user5.setName("user5");
 //		
 //		userRepository.save(user5);
-		
-		
-	}
+
+
+    }
 
 }

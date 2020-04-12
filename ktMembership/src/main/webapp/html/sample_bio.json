@@ -1,33 +1,140 @@
 {
- "today":{"Date":"20200127","physical":-91,"emotional":-30,"intellectual":100},
- "curMonth":
-	[
-	{"Date":"20200101","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200102","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200103","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200104","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200105","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200106","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200107","physical":-91,"emotional":-30,"intellectual":100}
-	],
-"prevMonth":
-	[
-	{"Date":"20191201","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20191202","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20191203","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20191204","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20191205","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20191206","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20191207","physical":-91,"emotional":-30,"intellectual":100}
-	],
-"nextMonth":
-	[
-	{"Date":"20200201","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200202","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200203","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200204","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200205","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200206","physical":-91,"emotional":-30,"intellectual":100},
-	{"Date":"20200207","physical":-91,"emotional":-30,"intellectual":100}
-	]
+  "today": {
+    "Date": "20200127",
+    "physical": -91,
+    "emotional": -30,
+    "intellectual": 100
+  },
+  "curMonth": [
+    {
+      "Date": "20200101",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200102",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200103",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200104",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200105",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200106",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200107",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    }
+  ],
+  "prevMonth": [
+    {
+      "Date": "20191201",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20191202",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20191203",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20191204",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20191205",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20191206",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20191207",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    }
+  ],
+  "nextMonth": [
+    {
+      "Date": "20200201",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200202",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200203",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200204",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200205",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200206",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    },
+    {
+      "Date": "20200207",
+      "physical": -91,
+      "emotional": -30,
+      "intellectual": 100
+    }
+  ]
 }

@@ -1,12 +1,15 @@
 package com.jkkim.demo.post;
 
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Post {
+public class Post extends AbstractAggregateRoot<Post> {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long Id;
 
     private String title;
@@ -48,5 +51,10 @@ public class Post {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public Post publish() {
+        this.registerEvent(new PostPublishedEvent(this));
+        return this;
     }
 }
