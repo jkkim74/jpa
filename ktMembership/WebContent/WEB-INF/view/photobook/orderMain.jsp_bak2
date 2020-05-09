@@ -8,7 +8,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>주문메인</title>
 <script>
-$.fn.serializeObject = function() {
+	$.fn.serializeObject = function() {
 	  "use strict"
 	  var result = {}
 	  var extend = function(i, element) {
@@ -27,18 +27,8 @@ $.fn.serializeObject = function() {
 	  $.each(this.serializeArray(), extend)
 	  return result
 	}
-
+	
 	$(document).ready(function(){
-		/*$("input[name=addrChg]").click(function(){
-			   var idx = $(this).index();  
-			//$(this).each(function(idx){
-				alert(idx);
-				var url = "/membership/webview/photobook/order/addressPop";
-				var addressPop = window.open(url, 'addressPop', 'titlebar=1, resizable=1, scrollbars=yes, width=600, height=550');
-			//});
-		});
-		*/
-		
 		$("#confirm").click(function(){
 			var url = "/membership/webview/photobook/order/view";
 			
@@ -59,7 +49,7 @@ $.fn.serializeObject = function() {
 			 
 	
 			
-			/*var aJsonArray = new Array();
+			var aJsonArray = new Array();
 			$("input[name=fullAddr]").each(function(idx,item){
 				//result += $(this).val()+"$";
 				//list.push($(item).val());
@@ -74,14 +64,13 @@ $.fn.serializeObject = function() {
 				
 				aJsonArray.push(aJson);
 			})
-			var sJson = JSON.stringify(aJsonArray);*/
+			var sJson = JSON.stringify(aJsonArray);
 			//var paramData = JSON.parse(sJson);
             //alert(paramData);
             
-    		var param1 = $("#fullAddrForm").serializeObject();//Array();//getParamInfo("fullAddrForm");//$.param(getParamInfo("fullAddrForm"));
-			var formData1 = JSON.stringify(param1);
-			alert(formData1);
-			$("#fullAddrList").val(formData1);
+    		/*var param1 = $("#fullAddrForm").serializeObject();//Array();//getParamInfo("fullAddrForm");//$.param(getParamInfo("fullAddrForm"));
+			var formData1 = JSON.stringify(param1);*/
+			$("#fullAddrList").val(sJson);
 			submitForm("photoForm");
 			 
 			/* aJson.seq = "01";
@@ -134,34 +123,6 @@ $.fn.serializeObject = function() {
 
 		});
 	});
-	function openAddrPop(idx){
-		var url = "/membership/webview/photobook/order/addressPop?idx="+idx;
-		var addressPop = window.open(url, 'addressPop', 'titlebar=1, resizable=1, scrollbars=yes, width=600, height=550');
-	}
-	
-	function setParentInfo(targIdx,seq,dvlName,dvlTel,postNo,addr1,addr2){
-		$("#spUserInfo"+targIdx).text(dvlName+" "+dvlTel);
-		$("#spAddrInfo"+targIdx).text("["+postNo+"]"+addr1+" "+addr2);
-		
-		$("input[name=fullAddr"+targIdx+"]").each(function(idx,item){
-			//result += $(this).val()+"$";
-			//list.push($(item).val());
-			if(idx == 0){
-				$(item).val(seq);
-			}else if(idx == 1){
-				$(item).val(dvlName);
-			}else if(idx == 2){
-				$(item).val(dvlTel);
-			}else if(idx == 3){
-				$(item).val(postNo);
-			}else if(idx == 4){
-				$(item).val(addr1);
-			}else{
-				$(item).val(addr2);
-			}
-		});
-		
-	}
 	function submitForm(elementId)
 	{
 		$("#" + elementId).submit();
@@ -194,15 +155,12 @@ $.fn.serializeObject = function() {
 포토북명 : <span>${photoBookName}</span><br />
 <form name="fullAddrForm" id="fullAddrForm">
 <c:forEach var="dvlInfo" items="${dvlInfoList}" varStatus="status">
-	<span name="spUserInfo" id="spUserInfo${status.index}">${dvlInfo.dvlName} ${dvlInfo.dvlTel}</span><br />
-	<span name="spAddrInfo" id="spAddrInfo${status.index}">[${dvlInfo.postNo}] ${dvlInfo.addr1} ${dvlInfo.addr1}</span> <input type="button" name="addrChg" id="addrChg" onclick="javascript:openAddrPop(${status.index})" value="변경" /> <br />
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.seq}"/>
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.dvlName}"/>
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.dvlTel}"/>
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.postNo}"/>
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.addr1}"/>
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.addr2}"/>
-	
+	<span>${dvlInfo.dvlName}</span>
+	<span>${dvlInfo.dvlTel}</span><br />
+	<span>[${dvlInfo.postNo}]</span>
+	<span>${dvlInfo.addr1}</span>
+	<span>${dvlInfo.addr1}</span><br />
+	<input type="hidden" name="fullAddr" value="${dvlInfo.seq};${dvlInfo.dvlName};${dvlInfo.dvlTel};${dvlInfo.postNo};${dvlInfo.addr1};${dvlInfo.addr2}"/> 
 </c:forEach>
 </form>
 사용건수 : <span>5</span><br />

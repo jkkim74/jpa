@@ -53,6 +53,7 @@ public class PhotoBookController {
 		return filePath+"orderMain";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@PostMapping("/order/view")
     public String orderPreview(@RequestParam Map<String, Object> paramMap, Model model) throws Exception {
     	//Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -117,6 +118,31 @@ public class PhotoBookController {
 		model.addAttribute("fullAddrList", fullAddrList);
     	return filePath+"orderPreview";
     }
+	
+	
+	@GetMapping("/order/addressPop")
+	public String addressPop(@RequestParam String idx, Model model) {
+		
+		List<Map<String,Object>> dvlInfoList = new ArrayList<>();
+		int i = 0;
+		
+		while(i < 5) {
+			Map<String,Object> dvlInfo = new HashMap<>();
+			dvlInfo.put("seq", i);
+			dvlInfo.put("dvlName", "윤은혜");
+			dvlInfo.put("dvlTel", "01059198201");
+			dvlInfo.put("postNo", "123456");
+			dvlInfo.put("addr1", "경기도 성남시 분당구 정자동");
+			dvlInfo.put("addr2", "파크뷰");
+			dvlInfoList.add(dvlInfo);
+			i++;
+		}
+		
+		
+		model.addAttribute("dvlInfoList", dvlInfoList);
+		model.addAttribute("targIdx", idx);
+		return filePath+"addressPop";
+	}
 	
 	
 	
