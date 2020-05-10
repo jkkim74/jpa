@@ -8,6 +8,7 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,32 +20,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jk.ktMembership.dao.LoyaltyDao;
+
 import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/webview/photobook")
 public class PhotoBookController {
 	
+	@Autowired
+	LoyaltyDao loyaltyDao;
+	
 	String filePath = "photobook/";
 	
 	@GetMapping("/order/main")
 	public String orderMain(Model model) {
 		
-		List<Map<String,Object>> dvlInfoList = new ArrayList<>();
-		int i = 0;
-		
-		while(i < 5) {
-			Map<String,Object> dvlInfo = new HashMap<>();
-			dvlInfo.put("seq", i);
-			dvlInfo.put("dvlName", "김재기");
-			dvlInfo.put("dvlTel", "01083304136");
-			dvlInfo.put("postNo", "345678");
-			dvlInfo.put("addr1", "경기도 성남시 분당구 금곡동");
-			dvlInfo.put("addr2", "청솔주공9단지 905-603");
-			dvlInfoList.add(dvlInfo);
-			i++;
-		}
-		
+		List<Map<String, Object>> dvlInfoList = loyaltyDao.getDvlInfoList();
 		
 		
 		model.addAttribute("photoBookName", "TEST PhotoBook");
@@ -67,7 +59,7 @@ public class PhotoBookController {
         Map<String,Object> addrMap = (Map<String,Object>)jsonObject;
     
         List<Object> list = new ArrayList<Object>(addrMap.values());
-        list.stream().sorted();
+       // list.stream().sorted();
         for(Object object : list) {
         	List<String> arrAddress = (List<String>)object;
     		Map<String,Object> dvlInfo = new HashMap<>();
@@ -121,7 +113,7 @@ public class PhotoBookController {
 	
 	
 	@GetMapping("/order/addressPop")
-	public String addressPop(@RequestParam String idx, Model model) {
+	public String addressPop(@RequestParam String idx,@RequestParam String seq, Model model) {
 		
 		List<Map<String,Object>> dvlInfoList = new ArrayList<>();
 		int i = 0;
@@ -141,7 +133,16 @@ public class PhotoBookController {
 		
 		model.addAttribute("dvlInfoList", dvlInfoList);
 		model.addAttribute("targIdx", idx);
+		model.addAttribute("seq", seq);
 		return filePath+"addressPop";
+	}
+	
+	
+	@GetMapping("/order/inputAddressPop")
+	public String inputAddressPop(@RequestParam String idx,@RequestParam String seq, Model model) {
+		model.addAttribute("targIdx", idx);
+		model.addAttribute("seq", seq);
+		return filePath+"inputAddressPop";
 	}
 	
 	

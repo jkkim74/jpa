@@ -11,7 +11,7 @@
 $(document).ready(function(){
 	$("#confirm").click(function(){
 		var selVal = $(":input:radio[name=selAddr]:checked").val();
-		var seq = $("#seq"+selVal).val();
+		var seq = "${seq}";
 		var dvlName = $("#dvlName"+selVal).val();
 		var dvlTel = $("#dvlTel"+selVal).val();
 		var postNo = $("#postNo"+selVal).val();
@@ -23,27 +23,35 @@ $(document).ready(function(){
 		window.close();
 	});
 	
+	$("#inputDvlAddr").click(function(){
+		var url = "/membership/webview/photobook/order/inputAddressPop?idx=${targIdx}&seq=${seq}";
+		var inputAddressPop = window.open(url, 'inputAddressPop', 'titlebar=1, resizable=1, scrollbars=yes, width=400, height=350');
+	});
+	
 });
 </script>
 </head>
 <body>
 <form name="fullAddrForm" id="fullAddrForm">
-*최근 배송 주소 <input type="button" name="inputDvlAddr" value="배송주소 입력" /> <br />
+*최근 배송 주소 <input type="button" name="inputDvlAddr" id="inputDvlAddr" value="배송주소 입력" /> <br />
+<ul>
 <c:forEach var="dvlInfo" items="${dvlInfoList}" varStatus="status">
-<input type="radio" name="selAddr" value="${status.index}" />
-	<span>${dvlInfo.dvlName}</span>
-	<span>${dvlInfo.dvlTel}</span><br />
-	<span>[${dvlInfo.postNo}]</span>
-	<span>${dvlInfo.addr1}</span>
-	<span>${dvlInfo.addr1}</span>  <br />
-	<input type="hidden" name="fullAddr[${status.index}]" id="seq${status.index}" value="${dvlInfo.seq}"/>
-	<input type="hidden" name="fullAddr[${status.index}]" id="dvlName${status.index}" value="${dvlInfo.dvlName}"/>
-	<input type="hidden" name="fullAddr[${status.index}]" id="dvlTel${status.index}" value="${dvlInfo.dvlTel}"/>
-	<input type="hidden" name="fullAddr[${status.index}]" id="postNo${status.index}" value="${dvlInfo.postNo}"/>
-	<input type="hidden" name="fullAddr[${status.index}]" id="addr1${status.index}" value="${dvlInfo.addr1}"/>
-	<input type="hidden" name="fullAddr[${status.index}]" id="addr2${status.index}" value="${dvlInfo.addr2}"/>
-	
+	<li>
+		<input type="radio" name="selAddr" value="${status.index}" />
+		<span>${dvlInfo.dvlName}</span>
+		<span>${dvlInfo.dvlTel}</span><br />
+		<span>[${dvlInfo.postNo}]</span>
+		<span>${dvlInfo.addr1}</span>
+		<span>${dvlInfo.addr1}</span>  <br />
+		<input type="hidden" name="fullAddr[${status.index}]" id="seq${status.index}" value="${dvlInfo.seq}"/>
+		<input type="hidden" name="fullAddr[${status.index}]" id="dvlName${status.index}" value="${dvlInfo.dvlName}"/>
+		<input type="hidden" name="fullAddr[${status.index}]" id="dvlTel${status.index}" value="${dvlInfo.dvlTel}"/>
+		<input type="hidden" name="fullAddr[${status.index}]" id="postNo${status.index}" value="${dvlInfo.postNo}"/>
+		<input type="hidden" name="fullAddr[${status.index}]" id="addr1${status.index}" value="${dvlInfo.addr1}"/>
+		<input type="hidden" name="fullAddr[${status.index}]" id="addr2${status.index}" value="${dvlInfo.addr2}"/>
+	</li>
 </c:forEach>
+</ul>
 </form>
 <input type="button" name="confirm" id="confirm" value="확인" />
 <input type="button" name="cancel"  id="cancel" value="취소" />

@@ -134,8 +134,8 @@ $.fn.serializeObject = function() {
 
 		});
 	});
-	function openAddrPop(idx){
-		var url = "/membership/webview/photobook/order/addressPop?idx="+idx;
+	function openAddrPop(idx,seq){
+		var url = "/membership/webview/photobook/order/addressPop?idx="+idx+"&seq="+seq;
 		var addressPop = window.open(url, 'addressPop', 'titlebar=1, resizable=1, scrollbars=yes, width=600, height=550');
 	}
 	
@@ -193,17 +193,20 @@ $.fn.serializeObject = function() {
 
 포토북명 : <span>${photoBookName}</span><br />
 <form name="fullAddrForm" id="fullAddrForm">
+<ul>
 <c:forEach var="dvlInfo" items="${dvlInfoList}" varStatus="status">
-	<span name="spUserInfo" id="spUserInfo${status.index}">${dvlInfo.dvlName} ${dvlInfo.dvlTel}</span><br />
-	<span name="spAddrInfo" id="spAddrInfo${status.index}">[${dvlInfo.postNo}] ${dvlInfo.addr1} ${dvlInfo.addr1}</span> <input type="button" name="addrChg" id="addrChg" onclick="javascript:openAddrPop(${status.index})" value="변경" /> <br />
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.seq}"/>
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.dvlName}"/>
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.dvlTel}"/>
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.postNo}"/>
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.addr1}"/>
-	<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.addr2}"/>
-	
+	<li>
+		<span id="spUserInfo${status.index}">${dvlInfo.dvlName} ${dvlInfo.dvlTel}</span><br />
+		<span id="spAddrInfo${status.index}">[${dvlInfo.postNo}] ${dvlInfo.addr1} ${dvlInfo.addr1}</span> <input type="button" name="addrChg" id="addrChg" onclick="javascript:openAddrPop(${status.index},${dvlInfo.seq})" value="변경" /> <br />
+		<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.seq}"/>
+		<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.dvlName}"/>
+		<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.dvlTel}"/>
+		<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.postNo}"/>
+		<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.addr1}"/>
+		<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.addr2}"/>
+	</li>
 </c:forEach>
+</ul>
 </form>
 사용건수 : <span>5</span><br />
 추가지급금액 : <span>10000</span>
