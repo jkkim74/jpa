@@ -11,6 +11,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,14 +39,12 @@ public class PhotoBookController {
 		
 		List<Map<String, Object>> dvlInfoList = loyaltyDao.getDvlInfoList();
 		
-		
 		model.addAttribute("photoBookName", "TEST PhotoBook");
 		model.addAttribute("dvlInfoList", dvlInfoList);
 		
 		return filePath+"orderMain";
 	}
 	
-	@SuppressWarnings("unchecked")
 	@PostMapping("/order/view")
     public String orderPreview(@RequestParam Map<String, Object> paramMap, Model model) throws Exception {
     	//Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -81,6 +80,36 @@ public class PhotoBookController {
     	model.addAttribute("paramMap", paramMap);
     	return filePath+"orderPreview2";
     }
+	
+	@SuppressWarnings("unchecked")
+	@PostMapping("/order/process")
+    public ModelMap orderProcess(@RequestParam Map<String, Object> paramMap, Model model) throws Exception {
+		ModelMap ret = new ModelMap();
+		
+    	String fullAddrList = (String)paramMap.get("fullAddrList");
+    	JSONParser jsonParser = new JSONParser();
+    	   System.out.println(fullAddrList);
+    	JSONObject jsonObject = (JSONObject) jsonParser.parse(fullAddrList);
+        List<Map<String,Object>> dvlInfoList = new ArrayList<>();
+        Map<String,Object> addrMap = (Map<String,Object>)jsonObject;
+    
+        List<Object> list = new ArrayList<Object>(addrMap.values());
+       // list.stream().sorted();
+        for(Object object : list) {
+        	List<String> arrAddress = (List<String>)object;
+    		Map<String,Object> dvlInfo = new HashMap<>();
+			dvlInfo.put("seq", arrAddress.get(0));
+			dvlInfo.put("dvlName", arrAddress.get(1));
+			dvlInfo.put("dvlTel", arrAddress.get(2));
+			dvlInfo.put("postNo", arrAddress.get(3));
+			dvlInfo.put("addr1", arrAddress.get(4));
+			dvlInfo.put("addr2", arrAddress.get(5));
+			dvlInfoList.add(dvlInfo);
+        	 
+        }
+		
+		return ret;
+	}
 	
 	
 	@GetMapping("/order/addressPop")

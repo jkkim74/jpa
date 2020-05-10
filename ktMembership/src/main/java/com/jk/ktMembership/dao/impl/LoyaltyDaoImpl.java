@@ -32,4 +32,10 @@ public class LoyaltyDaoImpl implements LoyaltyDao {
 		return dvlInfoList;
 	}
 
+	@Override
+	public String procOrderRuest(String txId, List<Object> addr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

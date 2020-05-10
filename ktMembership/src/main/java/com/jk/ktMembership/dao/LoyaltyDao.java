@@ -10,4 +10,6 @@ public interface LoyaltyDao {
 	
 	public List<Map<String, Object>> getDvlInfoList();
 
+	String procOrderRuest(String txId, List<Object> addr);
+
 }

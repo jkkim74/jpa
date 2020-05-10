@@ -6,27 +6,10 @@
 <head>
 <meta charset="utf-8">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/membership/js/util.js"></script>
 <title>주문메인</title>
 <script>
-$.fn.serializeObject = function() {
-	  "use strict"
-	  var result = {}
-	  var extend = function(i, element) {
-	    var node = result[element.name]
-	    if ("undefined" !== typeof node && node !== null) {
-	      if ($.isArray(node)) {
-	        node.push(element.value)
-	      } else {
-	        result[element.name] = [node, element.value]
-	      }
-	    } else {
-	      result[element.name] = element.value
-	    }
-	  }
 
-	  $.each(this.serializeArray(), extend)
-	  return result
-	}
 
 	$(document).ready(function(){
 		/*$("input[name=addrChg]").click(function(){
@@ -162,31 +145,7 @@ $.fn.serializeObject = function() {
 		});
 		
 	}
-	function submitForm(elementId)
-	{
-		$("#" + elementId).submit();
-	}
-	function submitAjax( url, type, async, param)
-	{
-		return $.ajax({
-			url      : url
-	      , type   : type
-	      , async : async
-	      , data	 : $.param(param)
-	      //, data	 : VestAjax(typeof(param)=='object'?$.param(param):param)
-	      , error	 :function( data)
-	      {
-	    	  alert("시스템 오류가 발생했습니다.");
-	      }
-		});
-	}
 
-	function getParamInfo(formId){
-		var formData = $("#"+formId).serializeArray();
-		var formData1 = JSON.stringify(formData);
-		var paramData = JSON.parse(formData1);
-		return paramData;
-	}
 </script>
 </head>
 <body>

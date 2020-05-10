@@ -6,6 +6,7 @@
 <head>
 <meta charset="EUC-KR">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/membership/js/util.js"></script>
 <title>주문 미리 보기</title>
 <script>
 $(document).ready(function(){
@@ -19,6 +20,10 @@ $(document).ready(function(){
 		row++;
 	}
 	$("#divAddressList").html(addrHtml);
+	
+	$("#confirm").click(function(){
+		submitForm("photoForm");
+	});
 });
 
 </script>
@@ -29,11 +34,11 @@ $(document).ready(function(){
 <div id="divAddressList"></div>
 사용건수 : <span>${paramMap.useCnt}</span><br />
 추가지급금액 : <span>${paramMap.addMoney}</span>
-<form name="photoForm" id="photoForm" method="post" action="/membership/webview/photobook/order/view" accept-charset="utf-8">
-<input type="hidden" name="photoBookName" value="${paramMap.photoBookName}"/>
-<input type="hidden" name="useCnt" value="${paramMap.useCnt}"/>
-<input type="hidden" name="addMoney" value="${paramMap.addMoney}"/>
-<input type="hidden" id="fullAddrList" name="fullAddrList" value="${paramMap.fullAddrList}"/>
+<form name="photoForm" id="photoForm" method="post" action="/membership/webview/photobook/order/process" accept-charset="utf-8">
+	<input type="hidden" name="photoBookName" value="${paramMap.photoBookName}"/>
+	<input type="hidden" name="useCnt" value="${paramMap.useCnt}"/>
+	<input type="hidden" name="addMoney" value="${paramMap.addMoney}"/>
+	<input type="hidden" id="fullAddrList" name="fullAddrList" value="${paramMap.fullAddrList}"/>
 </form>
 
 <input type="button" name="confirm" id="confirm" value="확인" />
