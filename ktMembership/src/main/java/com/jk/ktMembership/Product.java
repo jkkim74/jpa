@@ -18,6 +18,8 @@ public class Product {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created = new Date();
+	
+	private String txId;
 
 	public Long getId() {
 		return id;
@@ -42,6 +44,16 @@ public class Product {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+
+	public String getTxId() {
+		return txId;
+	}
+
+	public void setTxId(String txId) {
+		this.txId = txId;
+	}
+	
+	
 	
 
 }

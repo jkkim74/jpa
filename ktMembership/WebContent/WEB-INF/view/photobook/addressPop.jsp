@@ -25,7 +25,7 @@ $(document).ready(function(){
 	
 	$("#inputDvlAddr").click(function(){
 		var url = "/membership/webview/photobook/order/inputAddressPop?idx=${targIdx}&seq=${seq}";
-		var inputAddressPop = window.open(url, 'inputAddressPop', 'titlebar=1, resizable=1, scrollbars=yes, width=400, height=350');
+		var inputAddressPop = window.open(url, 'inputAddressPop', 'titlebar=1, resizable=1, scrollbars=yes, width=400, height=250');
 	});
 	
 });

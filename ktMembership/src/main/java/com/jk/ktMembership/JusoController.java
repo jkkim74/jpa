@@ -13,9 +13,20 @@ public class JusoController {
         return "popup/jusoPopup";
     }
     
+    @RequestMapping(value = "/popup/jusoSearchMain", method = {RequestMethod.GET, RequestMethod.POST})
+    public String getJusoSearchMain(ModelMap model) throws Exception {
+        return "popup/jusoSearchMain";
+    }
+    
     @RequestMapping(value = "/popup/sample", method = {RequestMethod.GET, RequestMethod.POST})
     public String getJusoSample(ModelMap model) throws Exception {
         return "popup/Sample";
     }
+    
+    @RequestMapping(value = "/popup/jusoApiPopup", method = {RequestMethod.GET, RequestMethod.POST})
+    public String getJusoApi(ModelMap model) throws Exception {
+        return "popup/apiSampleJSON";
+    }
+    
 
 }
