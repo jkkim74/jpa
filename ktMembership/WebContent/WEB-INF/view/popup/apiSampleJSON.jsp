@@ -3,6 +3,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>주소정보연계 | 도로명주소 안내시스템</title>
+<meta name="title" content="">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta content="initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, width=device-width, user-scalable=no" name="viewport">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style type="text/css">
 .pagin a{
@@ -167,15 +174,14 @@ function setPagInfoAfterAjax(jsonStr){
 
 function makeListJson(jsonStr){
 	var htmlStr = "";
-	htmlStr += "<table>";
-	$(jsonStr.results.juso).each(function(){
-		htmlStr += "<tr>";
-		htmlStr += "<td>"+this.roadAddr+"</td>";
-		htmlStr += "<td>"+this.roadAddrPart1+"</td>";
-		htmlStr += "<td>"+this.roadAddrPart2+"</td>";
-		htmlStr += "<td>"+this.jibunAddr+"</td>";
+	htmlStr += "<ul>";
+	$(jsonStr.results.juso).each(function(idx){
+		htmlStr += "<li><input type='radio' name='addrSel' value='"+idx+"'/>도로명 : <a href=# id='roadAddr"+idx+"'>"+this.roadAddr+"</a><br /> 지번:<a href=# id='jibunAddr"+idx+"'>"+this.jibunAddr+"</a>";
 		//htmlStr += "<td>"+this.engAddr+"</td>";
-		htmlStr += "<td>"+this.zipNo+"</td>";
+		htmlStr += "<a href=# id='zipNo"+idx+"'>"+this.zipNo+"<a>";
+		htmlStr += "<input type='hidden' name='roadAddrPart1' id='roadAddrPart1"+idx+"' value='"+this.roadAddrPart1+"' />";
+		//htmlStr += "<td>"+this.roadAddrPart1+"</td>";
+		//htmlStr += "<td>"+this.roadAddrPart2+"</td>";
 		//htmlStr += "<td>"+this.admCd+"</td>";
 		//htmlStr += "<td>"+this.rnMgtSn+"</td>";
 		//htmlStr += "<td>"+this.bdMgtSn+"</td>";
@@ -195,23 +201,10 @@ function makeListJson(jsonStr){
 		//htmlStr += "<td>"+this.lnbrMnnm+"</td>";
 		//htmlStr += "<td>"+this.lnbrSlno+"</td>";
 		//htmlStr += "<td>"+this.emdNo+"</td>";
-		htmlStr += "</tr>";
+		htmlStr += "</li> <br />";
 	});
-	htmlStr += "</table>";
+	htmlStr += "</ul>";
 	$("#list").html(htmlStr);
-	
-	
-	/*$(jsonStr.results.juso).each(function(){
-		
-        <strong>1</strong>
-        <a href="?currentPage=2&countPerPage=5&searchType=TOTAL&searchKeyword=%EB%AF%B8%EA%B8%88%EB%A1%9C&lang=&sortType=acc">2</a>
-        <a href="?currentPage=3&countPerPage=5&searchType=TOTAL&searchKeyword=%EB%AF%B8%EA%B8%88%EB%A1%9C&lang=&sortType=acc">3</a>
-        <a href="?currentPage=4&countPerPage=5&searchType=TOTAL&searchKeyword=%EB%AF%B8%EA%B8%88%EB%A1%9C&lang=&sortType=acc">4</a>
-        <a href="?currentPage=5&countPerPage=5&searchType=TOTAL&searchKeyword=%EB%AF%B8%EA%B8%88%EB%A1%9C&lang=&sortType=acc">5</a>
-        <a class='skip next' href="?currentPage=6&countPerPage=5&searchType=TOTAL&searchKeyword=%EB%AF%B8%EA%B8%88%EB%A1%9C&lang=&sortType=acc">다음으로</a>
- 
-	}*/
-	
 }
 
 //특수문자, 특정문자열(sql예약어의 앞뒤공백포함) 제거
@@ -254,21 +247,43 @@ function enterSearch() {
 	} 
 }
 
+function setAddr(){
+	
+	var idx = $("input[name=addrSel]:checked").val();
+	console.log(idx);
+	var selRoadAddr = $("#roadAddrPart1"+idx).val();
+	var selJibunAddr = $("#jibunAddr"+idx).text();
+	var selZipNo = $("#zipNo"+idx).text();
+	console.log(selRoadAddr);
+	console.log(selZipNo);
+	opener.jusoCallBack(selRoadAddr,"",selZipNo);
+	window.close();
+	
+}
+
 
 </script>
-<title>Insert title here</title>
+<title>주소API팝업</title>
 </head>
 <body>
+<form name="rtForm" id="rtForm" method="post">
+	<input type="hidden" name="roadFullAddr" id="roadFullAddr"/>  
+	<input type="hidden" name="roadAddrPart1" id="roadAddrPart1"/>
+	<input type="hidden" name="roadAddrPart2" id="roadAddrPart2"/>            
+	<input type="hidden" name="jibunAddr" id="jibunAddr"/>        
+	<input type="hidden" name="zipNo" id="zipNo"/>                
+</form>
 <form name="form" id="form" method="post">
-	<input type="text" name="currentPage" id="currentPage" value="1"/> <!-- 요청 변수 설정 (현재 페이지. currentPage : n > 0) -->
-	<input type="text" name="countPerPage" value="10"/><!-- 요청 변수 설정 (페이지당 출력 개수. countPerPage 범위 : 0 < n <= 100) -->
-	<input type="text" name="resultType" value="json"/> <!-- 요청 변수 설정 (검색결과형식 설정, json) --> 
-	<input type="text" name="confmKey" value="	devU01TX0FVVEgyMDIwMDUxNjA3NDQxODEwOTc2MzI="/><!-- 요청 변수 설정 (승인키) -->
+	<input type="hidden" name="currentPage" id="currentPage" value="1"/> <!-- 요청 변수 설정 (현재 페이지. currentPage : n > 0) -->
+	<input type="hidden" name="countPerPage" value="10"/><!-- 요청 변수 설정 (페이지당 출력 개수. countPerPage 범위 : 0 < n <= 100) -->
+	<input type="hidden" name="resultType" value="json"/> <!-- 요청 변수 설정 (검색결과형식 설정, json) --> 
+	<input type="hidden" name="confmKey" value="	devU01TX0FVVEgyMDIwMDUxNjA3NDQxODEwOTc2MzI="/><!-- 요청 변수 설정 (승인키) -->
 	<input type="text" name="keyword" value="" onkeydown="enterSearch();"/><!-- 요청 변수 설정 (키워드) -->
 	<input type="button" onClick="goSearch();" value="주소검색하기"/>
 	<div id="list" ></div><!-- 검색 결과 리스트 출력 영역 -->
 	<div class="page_num">
 	</div>
+	<input type="button" name="confirm" onclick="javascript:setAddr();" id="confirm"  value="확인"/>
 </form>
 </body>
 </html>

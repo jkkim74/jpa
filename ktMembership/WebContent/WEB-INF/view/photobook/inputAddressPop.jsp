@@ -10,7 +10,7 @@
 <script>
 $(document).ready(function(){
 	$("#address").click(function(){
-		var url = "/membership/popup/jusoPopup";
+		var url = "/membership/popup/jusoApiPopup"; //jusoPopup";
 		var addressApi = window.open(url, 'addressApi', 'titlebar=1, resizable=1, scrollbars=yes, width=400, height=700');
 	});
 	
@@ -30,7 +30,14 @@ $(document).ready(function(){
 	
 });
 
-function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+/* function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+	document.form.roadAddrPart1.value = roadAddrPart1;
+	document.form.addrDetail.value = addrDetail;
+	document.form.zipNo.value = zipNo;
+}*/
+
+function jusoCallBack(roadAddrPart1,addrDetail,zipNo){
 	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 	document.form.roadAddrPart1.value = roadAddrPart1;
 	document.form.addrDetail.value = addrDetail;
