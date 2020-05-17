@@ -250,15 +250,11 @@ function enterSearch() {
 function setAddr(){
 	
 	var idx = $("input[name=addrSel]:checked").val();
-	console.log(idx);
 	var selRoadAddr = $("#roadAddrPart1"+idx).val();
 	var selJibunAddr = $("#jibunAddr"+idx).text();
 	var selZipNo = $("#zipNo"+idx).text();
-	console.log(selRoadAddr);
-	console.log(selZipNo);
 	opener.jusoCallBack(selRoadAddr,"",selZipNo);
-	window.close();
-	
+	window.close();	
 }
 
 
