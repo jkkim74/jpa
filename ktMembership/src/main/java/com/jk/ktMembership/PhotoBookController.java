@@ -112,7 +112,7 @@ public class PhotoBookController {
 	}
 	
 	
-	@GetMapping("/order/addressPop")
+	@RequestMapping(value="/order/addressPop",method= {RequestMethod.GET,RequestMethod.POST})
 	public String addressPop(@RequestParam String idx,@RequestParam String seq, Model model) {
 		
 		List<Map<String,Object>> dvlInfoList = new ArrayList<>();

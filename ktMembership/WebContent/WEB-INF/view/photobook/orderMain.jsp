@@ -113,13 +113,39 @@
 			aJsonArray.push(aJson);*/
 			 
 			
-
+			/*function to_ajax(){
+				 
+			    $.ajax({
+			        type : 'get',
+			        url : '/test.jsp,
+			        dataType : 'xml',
+			        beforeSend : function(xhr){
+			            xhr.setRequestHeader("ApiKey", "asdfasxdfasdfasdf");
+			            xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			        },
+			        error: function(xhr, status, error){
+			            alert(error);
+			        }
+			        success : function(xml){
+			            alert(xml)
+			        },
+			    });
+			 
+			 
+			}*/
 
 		});
 	});
 	function openAddrPop(idx,seq){
-		var url = "/membership/webview/photobook/order/addressPop?idx="+idx+"&seq="+seq;
+		var url = "/membership/webview/photobook/order/addressPop";//?idx="+idx+"&seq="+seq;
 		var addressPop = window.open(url, 'addressPop', 'titlebar=1, resizable=1, scrollbars=yes, width=600, height=550');
+		$("#frmPop").attr("action",url);
+		$("#frmPop").attr("method","POST");
+		$("#frmPop").attr("target","addressPop");
+		$("#frmPop").children("#idx").val(idx);
+		$("#frmPop").children("#seq").val(seq);
+		$("#frmPop").submit();
+		
 	}
 	
 	function setParentInfo(targIdx,seq,dvlName,dvlTel,postNo,addr1,addr2){
@@ -156,7 +182,7 @@
 <c:forEach var="dvlInfo" items="${dvlInfoList}" varStatus="status">
 	<li>
 		<span id="spUserInfo${status.index}">${dvlInfo.dvlName} ${dvlInfo.dvlTel}</span><br />
-		<span id="spAddrInfo${status.index}">[${dvlInfo.postNo}] ${dvlInfo.addr1} ${dvlInfo.addr1}</span> <input type="button" name="addrChg" id="addrChg" onclick="javascript:openAddrPop(${status.index},${dvlInfo.seq})" value="변경" /> <br />
+		<span id="spAddrInfo${status.index}">[${dvlInfo.postNo}] ${dvlInfo.addr1} ${dvlInfo.addr1}</span> <input type="button" name="addrChg" id="addrChg" onclick="javascript:openAddrPop(${status.index},${dvlInfo.seq})" value="변경" /> <input type="button" name="addrDel" id="addrDel" onclick="javascript:delAddr(${status.index},${dvlInfo.seq})" value="삭제" /> <br />
 		<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.seq}"/>
 		<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.dvlName}"/>
 		<input type="hidden" name="fullAddr${status.index}" value="${dvlInfo.dvlTel}"/>
@@ -174,6 +200,10 @@
 <input type="hidden" name="useCnt" value="5"/>
 <input type="hidden" name="addMoney" value="10000"/>
 <input type="hidden" id="fullAddrList" name="fullAddrList" value=""/>
+</form>
+<form name="frmPop" id="frmPop">
+	<input type="hidden" name="idx" id="idx" />
+	<input type="hidden" name="seq" id="seq" />
 </form>
 
 <input type="button" name="confirm" id="confirm" value="확인" />
