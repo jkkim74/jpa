@@ -7,6 +7,16 @@
 <meta charset="EUC-KR">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>주문 미리 보기</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#confirm").click(function(){
+		localStorage.setItem("photoBookName",'${photoBookName}');
+		localStorage.setItem("useCnt",'${useCnt}');
+		localStorage.setItem("fullAddrList",'${dvlInfoList}');
+		location.href = "/membership/webview/photobook/order/auth/ok";
+	});
+});
+</script>
 </head>
 <body>
 주문 미리 보기 <br />
@@ -24,7 +34,7 @@
 <input type="hidden" name="photoBookName" value="${photoBookName}"/>
 <input type="hidden" name="useCnt" value="${useCnt}"/>
 <input type="hidden" name="addMoney" value="${addMoney}"/>
-<input type="hidden" id="fullAddrList" name="fullAddrList" value="${fullAddrList}"/>
+<input type="hidden" id="fullAddrList" name="fullAddrList" value="${dvlInfoList}"/>
 </form>
 
 <input type="button" name="confirm" id="confirm" value="확인" />

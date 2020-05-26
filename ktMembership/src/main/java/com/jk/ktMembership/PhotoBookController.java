@@ -78,8 +78,14 @@ public class PhotoBookController {
 //		model.addAttribute("dvlInfoList", dvlInfoList);
 //		model.addAttribute("fullAddrList", fullAddrList);
     	model.addAttribute("paramMap", paramMap);
-    	return filePath+"orderPreview2";
+    	return filePath+"orderPreview";
     }
+	
+	@GetMapping("/order/auth/ok")
+    public String orderAuthOk(@RequestParam Map<String, Object> paramMap, Model model) throws Exception {
+		
+		return filePath+"orderAuthOk"; 
+	}
 	
 	@SuppressWarnings("unchecked")
 	@PostMapping("/order/process")
